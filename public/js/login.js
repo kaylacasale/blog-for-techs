@@ -48,7 +48,9 @@ const signupFormHandler = async (event) => {
 };
 
 document
+    // grabs form element with class="form login-form" to take input when existing user logs in
     .querySelector('.login-form')
+    // listener for button element with type="submit", current btn text equal to login
     .addEventListener('submit', loginFormHandler);
 
 document
