@@ -42,6 +42,7 @@ router.get('/', async (req, res) => {
 });
 
 //* GET one blog post
+//* renders the handlebar page
 router.get('/blog/:id', async (req, res) => {
     try {
         const blogData = await Blog.findByPk(req.params.id, {
