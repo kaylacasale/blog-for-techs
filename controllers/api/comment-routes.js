@@ -1,13 +1,15 @@
 const router = require('express').Router();
 const { Comment } = require('../models');
-// const withAuth = require('../utils/auth');
+const withAuth = require('../../utils/auth');
 
+// const withAuth = require('../utils/auth');
+//* auth required to manipulate comments
 //* POST request / route to add new comment to blog post
-router.get('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try {
         const newComment = await Comment.create({
             ...req.body,
-            user_id: req.session.user_id,
+            blog_id: req.session.blog_id,
         });
         res.status(200).json(newComment);
     } catch (err) {
@@ -16,14 +18,23 @@ router.get('/', async (req, res) => {
 });
 
 //* DELETE request / route to delete a comment from the blog post
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.destroy({
             where: {
                 id: req.params.id,
-                user_id: req.session.user_id,
+                blog_id: req.params.blog_id,//* will have info about blog (time created, date, etc.?)
             },
         });
-        if (!)
+        if (!commentData) {
+            res.status(404).json({ message: 'No comments associated with this id!' });
+            return;
+        }
+
+        res.status(200).json(commentData);
+    } catch (err) {
+        res.status(500).json(err);
     }
-})
+});
+
+module.exports = router;

@@ -3,17 +3,23 @@ const { User } = require('../../models');
 
 //* route to create new user (frontend)
 //* post request because sending over username and password
+//* SIGN UP route (if account not existing) - creating User object with user info
+// THEN I am prompted to either sign up or sign in
+// WHEN I choose to sign up
+// THEN I am prompted to create a username and password
 router.post('/', async (req, res) => {
     try {
-        const dbUserData = await User.create({
+        const userData = await User.create({
             username: req.body.username,
             password: req.body.password,
         });
-
+        // WHEN I click on the sign-up button
+        // THEN my user credentials are saved and I am logged into the site
         req.session.save(() => {
+            req.session.user_id = userData.id; //* when user_id foreign key from Blog equals User model id
             req.session.loggedIn = true;
 
-            res.status(200).json(dbUserData);
+            res.status(200).json(userData);
         });
     } catch (err) {
         console.log(err);
@@ -22,24 +28,26 @@ router.post('/', async (req, res) => {
 });
 
 //* route to login for users (frontend)
+// WHEN I revisit the site at a later time and choose to sign in
+// THEN I am prompted to enter my username and password
 
 router.post('/login', async (req, res) => {
     try {
         //* find a user where username input matches one stored in User database
-        const dbUserData = await User.findOne({
+        const userData = await User.findOne({
             where: {
                 username: req.body.username,
             },
         });
 
-        if (!dbUserData) {
+        if (!userData) {
             res
                 .status(400)
                 .json({ message: 'Incorrect email or password. Please try again!' });
             return;
         }
         //* verify (validate) user password from POST request sent (password input)
-        const validPassword = await dbUserData.checkPassword(req.body.password);
+        const validPassword = await userData.checkPassword(req.body.password);
 
         if (!validPassword) {
             res
@@ -49,6 +57,7 @@ router.post('/login', async (req, res) => {
         }
 
         req.session.save(() => {
+            req.session.user_id = userData.id;
             req.session.loggedIn = true;
             console.log(
                 '🚀 ~ file: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
@@ -57,7 +66,7 @@ router.post('/login', async (req, res) => {
 
             res
                 .status(200)
-                .json({ user: dbUserData, message: 'You are now logged in!' });
+                .json({ user: userData, message: 'You are now logged in!' });
         });
     } catch (err) {
         console.log(err);

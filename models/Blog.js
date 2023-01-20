@@ -19,6 +19,13 @@ Blog.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: { //* references username so it can be displayed with each blog post
+                model: 'user',
+                key: 'id',
+            }
+        }
     },
     {
         sequelize,
