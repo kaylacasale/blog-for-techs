@@ -5,11 +5,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Blog For Techs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 </head>
 
 <body>
+    <nav class="navbar navbar-light bg-light shadow-lg mb-5 p-3">
+        <a class="navbar-brand" href="#">Blog for Techs</a>
+        <i class="material-icons d-inline-block align-top">accessibility</i>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <!-- Conditionally render login or logout links -->
+                {{#if logged_in}}
+                <a class="nav-item nav-link active" href="/dashboard">Home <span class="sr-only">(current)</span></a> |
+                <button class="no-button" id="logout">logout</button>
+                {{else}}
+                <a href="/login">login</a>
+                {{/if}}
+                <a class="nav-item nav-link active" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Dashboard</a>
+                <!-- <a class="nav-item nav-link" href="#">Logout</a> -->
+                <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+                <!-- Render the sub layout -->
 
+                {{{body}}}
+            </div>
+        </div>
+    </nav>
+    <p class="shadow-lg p-3 mx-2 my-2"></p>
+    <!-- Render script for logged in users only -->
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
+</body>
+
+</html>
 </body>
 
 </html>
