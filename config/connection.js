@@ -1,3 +1,4 @@
+//* add .env file to encrypt info (after installling 'npm i dotenv')
 const Sequelize = require('sequelize');
 require('dotenv').config();
 

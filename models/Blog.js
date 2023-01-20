@@ -19,6 +19,11 @@ Blog.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        date_created: { //* TODO: pass into helpers.js to format date (?)
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
         user_id: {
             type: DataTypes.INTEGER,
             references: { //* references username so it can be displayed with each blog post

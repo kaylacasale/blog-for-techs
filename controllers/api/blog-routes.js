@@ -16,7 +16,7 @@ router.post('/', withAuth, async (req, res) => {
         res.status(400).json(err);
     }
 });
-//* update blog data
+//* update blog data (title and content) with PUT request
 router.put('/:id', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.update({
