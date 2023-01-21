@@ -7,7 +7,7 @@ const loginFormHandler = async (event) => {
     const username = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
 
-    if (email && username) {
+    if (username && password) {
         // Send a POST request to the API endpoint
         //* fetch user login data from database to see if existant through api/users/login route
         const response = await fetch('/api/users/login', {

@@ -84,7 +84,7 @@ router.get('/comment/:id', async (req, res) => {
 
             const comment = commentData.get({ plain: true });
 
-            res.render('comment', { comment, loggedIn: req.session.loggedIn });
+            res.render('blog', { comment, loggedIn: req.session.loggedIn });
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
