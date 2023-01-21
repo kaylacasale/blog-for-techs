@@ -17,6 +17,7 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 //* update blog data (title and content) with PUT request
+//* after pressing UPDATE button referenced in updateBlog.handlebars and handled in public/js/dashboard.js
 router.put('/:id', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.update({
@@ -40,6 +41,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 //* DELETE request - route to delete an existing blog post (by id)
+//* after pressing DELETE button referenced in deleteBlog.handlebars and handled in public/js/dashboard.js
 router.delete('/:id', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.destroy({

@@ -1,6 +1,6 @@
 // WHEN I click on the button to create a new blog post
 
-const { DELETE, UPDATE } = require("sequelize/types/query-types");
+const { DELETE, UPDATE, POST } = require("sequelize/types/query-types");
 //* require update/put method
 // THEN the title and contents of my post are saved and I am taken back to an updated dashboard with my new blog post
 const newFormHandler = async (event) => {

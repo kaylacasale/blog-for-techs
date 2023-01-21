@@ -13,33 +13,48 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light shadow-lg mb-5 p-3">
-        <a class="navbar-brand" href="#">Blog for Techs</a>
-        <i class="material-icons d-inline-block align-top">accessibility</i>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <!-- Conditionally render login or logout links -->
-                {{#if logged_in}}
-                <a class="nav-item nav-link active" href="/dashboard">Home <span class="sr-only">(current)</span></a> |
-                <button class="no-button" id="logout">logout</button>
-                {{else}}
-                <a href="/login">login</a>
-                {{/if}}
-                <a class="nav-item nav-link active" href="/dashboard">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Dashboard</a>
-                <!-- <a class="nav-item nav-link" href="#">Logout</a> -->
-                <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
-                <!-- Render the sub layout -->
+    <div>
+        <nav class="navbar navbar-light bg-light shadow-lg mb-5 p-3">
+            <a class="navbar-brand" href="/">Blog for Techs</a>
+            <i class="material-icons d-inline-block align-top">accessibility</i>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    {{!-- since Home and Dashboard will always be options despite being logged in or logged out --}}
+                    <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="/dashboard">Dashboard <span
+                            class="sr-only">(current)</span></a>
+                    <!-- Conditionally render login or logout links -->
+                    {{#if logged_in}}
+                    {{!-- <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a> |
+                    --}}
+                    <button class="no-button" id="logout">logout</button>
+                    {{else}}
+                    <a href="/login">login</a>
+                    {{/if}}
+                    {{!-- <a class="nav-item nav-link active" href="/dashboard">Dashboard <span
+                            class="sr-only">(current)</span></a> --}}
+                    {{!-- <a class="nav-item nav-link" href="#">Dashboard</a> --}}
+                    <!-- <a class="nav-item nav-link" href="#">Logout</a> -->
+                    <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+                    <!-- Render the sub layout -->
 
-                {{{body}}}
+                    {{!-- {{{body}}} --}}
+                </div>
             </div>
-        </div>
-    </nav>
-    <p class="shadow-lg p-3 mx-2 my-2"></p>
+        </nav>
+        <p class="shadow-lg p-3 mx-2 my-2"></p>
+        <main class="container container-fluid mt-5">
+            <!-- Render the sub layout -->
+            {{{ body }}}
+        </main>
+        <footer>
+
+        </footer>
+    </div>
     <!-- Render script for logged in users only -->
     {{#if logged_in}}
     <script src="/js/logout.js"></script>
