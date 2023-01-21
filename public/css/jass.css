@@ -186,12 +186,10 @@ select {
 /**
    * Correct the inability to style clickable types in iOS and Safari.
    */
-button,
+/* button,
 [type='button'],
 [type='reset'],
-[type='submit'] {
-    -webkit-appearance: button;
-}
+[type='submit']  */
 
 /**
    * Remove the inner border and padding in Firefox.
@@ -1124,8 +1122,8 @@ form .form-textarea {
 }
 
 form select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    /* -webkit-appearance: none;
+    -moz-appearance: none; */
     background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
     background-repeat: no-repeat;
     background-position-x: 98%;

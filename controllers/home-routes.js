@@ -49,18 +49,12 @@ router.get('/blog/:id', async (req, res) => {
             include: [
                 {
                     model: Comment,
-                    attributes: [
-                        'id',
-                        'comment',
-                        'blog_id'
-                    ],
                 },
                 {
                     mode: User,
                     attributes: [
-                        'id',
                         'username',
-                    ]
+                    ],
                 },
             ],
         });
@@ -122,7 +116,7 @@ router.get('/login', (req, res) => {
         res.redirect('/');
         return;
     }
-    res.render('dashboard');
+    res.render('login');
 });
 
 module.exports = router;

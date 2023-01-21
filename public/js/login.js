@@ -12,7 +12,7 @@ const loginFormHandler = async (event) => {
         //* fetch user login data from database to see if existant through api/users/login route
         const response = await fetch('/api/users/login', {
             method: 'POST',
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ username, password }),
             headers: { 'Content-Type': 'application/json' },
         });
 
