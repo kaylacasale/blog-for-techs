@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
         //* pass serialied data and session flag into template
         res.render('homepage', {
             blogs,
-            loggedIn: req.session.loggedIn,
+            logged_in: req.session.logged_in,
 
         });
     } catch (err) {
@@ -51,7 +51,7 @@ router.get('/blog/:id', async (req, res) => {
                     model: Comment,
                 },
                 {
-                    mode: User,
+                    model: User,
                     attributes: [
                         'username',
                     ],
@@ -60,9 +60,12 @@ router.get('/blog/:id', async (req, res) => {
         });
 
         const blog = blogData.get({ plain: true });
-        res.render('blog', { blog, loggedIn: req.session.loggedIn });
+
+        res.render('blog', {
+            ...blog,
+            logged_in: req.session.logged_in
+        });
     } catch (err) {
-        console.log(err);
         res.status(500).json(err)
     }
 
@@ -70,15 +73,25 @@ router.get('/blog/:id', async (req, res) => {
 
 //* GET request - route to get one comment associated with blog post by primary key ( may not need in home routes)
 router.get('/comment/:id', async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.redirect('/login');
+    if (!req.session.logged_in) {
+        res.redirect('/dashboard');
     } else {
         try {
-            const commentData = await Comment.findByPk(req.params.id);
+            const commentData = await Comment.findByPk(req.params.id, {
+                include: [
+                    {
+                        model: User,
+                        attributes: ['username'],
+                    },
+                ],
+            });
 
             const comment = commentData.get({ plain: true });
 
-            res.render('blog', { comment, loggedIn: req.session.loggedIn });
+            res.render('comment', {
+                ...comment,
+                logged_in: req.session.logged_in
+            });
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
@@ -112,11 +125,21 @@ router.get('/dashboard', withAuth, async (req, res) => {
 //* if the user is already logged in, redirect the request to another route (the dashboards to view blog posts)
 router.get('/login', (req, res) => {
     //* if the user is logged in, allow them to see comment associated with blog
-    if (req.session.loggedIn) {
-        res.redirect('/');
+    if (req.session.logged_in) {
+        res.redirect('/dashboard');
         return;
     }
     res.render('login');
 });
+
+//* route to sign in from login page
+//* if user pressed SIGN IN from login page, redirect to sign in page (signup form handler in signup.js and signup.handlebars)
+router.get('/signup', (req, res) => {
+    if (req.session.logged_in) {
+        res.redirect('/dashboard');
+        return
+    }
+    res.render('signup')
+})
 
 module.exports = router;

@@ -1,5 +1,5 @@
 {
-  "name": "my-metro-buddy",
+  "name": "blog-for-techs",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AHStovall/my-metro-buddy.git"
+    "url": "git+https://github.com/kaylacasale/blog-for-techs.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AHStovall/my-metro-buddy/issues"
+    "url": "https://github.com/kaylacasale/blog-for-techs/issues"
   },
-  "homepage": "https://github.com/AHStovall/my-metro-buddy#readme",
+  "homepage": "https://github.com/kaylacasale/blog-for-techs#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "connect-session-sequelize": "^7.1.5",
