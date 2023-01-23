@@ -21,17 +21,17 @@ const seedDatabase = async () => {
         });
     }
     //* do not know if this is correct below (awaiting blog data to seed comments?)
-    // const blogs = await Blog.bulkCreate(blogData, {
-    //     individualHooks: true,
-    //     returning: true,
-    // });
-    // for (const comment of commentData) {
-    //     await Comment.create({
-    //         ...comment,
-    //         comment_id: blogs[Math.floor(Math.random() * users.length)].id,
+    const blogs = await Blog.bulkCreate(blogData, {
+        individualHooks: true,
+        returning: true,
+    });
+    for (const comment of commentData) {
+        await Comment.create({
+            ...comment,
+            comment_id: blogs[Math.floor(Math.random() * users.length)].id,
 
-    //     });
-    // }
+        });
+    }
 
     process.exit(0);
 };
