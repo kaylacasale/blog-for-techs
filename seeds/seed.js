@@ -20,6 +20,8 @@ const seedDatabase = async () => {
             user_id: users[Math.floor(Math.random() * users.length)].id,
         });
     }
+
+
     for (const comment of commentData) {
         await Comment.create({
             ...comment,
@@ -27,6 +29,11 @@ const seedDatabase = async () => {
 
         });
     }
+
+    // await Comment.bulkCreate(commentData, {
+    //     individualHooks: true,
+    //     returning: true,
+    // })
 
     //* do not know if this is correct below (awaiting blog data to seed comments?)
     // const blogs = await Blog.Create(blogData, {
