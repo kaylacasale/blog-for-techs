@@ -23,3 +23,8 @@ header,
     font-weight: bold;
     margin-left: -5px;
 }
+
+.blog-list {
+    float: right;
+    width: 50%;
+}

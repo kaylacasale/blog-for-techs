@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
         const blogs = blogData.map((blog) =>
             blog.get({ plain: true })
         );
-
+        console.log(blogs)
         //* pass serialied data and session flag into template
         res.render('homepage', {
             blogs,
