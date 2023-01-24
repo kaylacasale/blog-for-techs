@@ -16,5 +16,14 @@
             <input class="form-input" type="text" id="comment" name="comment" />
         </div>
     </form>
-
 </div>
+
+{{#each blog.comments as |comment|}}
+<section class="card">
+    <a href="/comments/{{id}}">
+        <h2>{{comment}}</h2>
+    </a>
+</section>
+{{/each}}
+
+<script src="/js/blog.js"></script>

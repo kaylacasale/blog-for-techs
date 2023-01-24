@@ -2,6 +2,24 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+router.get('/', async (req, res) => {
+    try {
+        const commentData = await Comment.findAll({})
+
+        const comments = commentData.map((comment) =>
+            comment.get({ plain: true }))
+
+        res.render('comment', {
+            ...comments,
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+});
+
+
+
 // const withAuth = require('../utils/auth');
 //* auth required to manipulate comments
 //* POST request / route to add new comment to blog post

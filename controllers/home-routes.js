@@ -25,6 +25,11 @@ router.get('/', async (req, res) => {
                 },
                 {
                     model: Comment,
+                    attributes: [
+                        'id',
+                        'comment',
+                        'blog_id'
+                    ],
                 },
             ]
         });
@@ -33,12 +38,6 @@ router.get('/', async (req, res) => {
             blog.get({ plain: true })
         );
 
-        // const commentData = await Comment.findAll({
-
-
-        // });
-        // const comments = commentData.map((comment) =>
-        //     comment.get({ plain: true }))
         //* pass serialied data and session flag into template
         res.render('homepage', {
             blogs,
@@ -59,6 +58,11 @@ router.get('/blog/:id', async (req, res) => {
             include: [
                 {
                     model: Comment,
+                    attributes: [
+                        'id',
+                        'comment',
+                        'blog_id'
+                    ],
                 },
                 {
                     model: User,
@@ -84,6 +88,33 @@ router.get('/blog/:id', async (req, res) => {
 
 //* GET request - route to get one comment associated with blog post by primary key ( may not need in home routes)
 //* get comments associated with blog post to display as list after running through array in homepage.handlebars and display body index info in comment.handlebars
+// router.get('/blogs-comments', async (req, res) => {
+//     const dbBlogData = Blog.findOne({
+//         where: {
+//             id: req.params.id
+//         },
+//         attributes: [
+//             'id',
+//             'title',
+//             'content',
+//             'date_created',
+//             'user_id'
+//         ],
+//         include: [
+//             {
+//                 model: Comment,
+//                 attributes: [
+//                     'id',
+//                     'comment',
+//                     'blog_id'
+//                 ],
+//             },
+//         ],
+//     })
+//     const blog = dbBlogData.get({ plain: true })
+//     res.render('blogs-comments', { blog, logged_in: req.session.logged_in })
+// });
+
 router.get('/comment/:id', async (req, res) => {
     // if (!req.session.logged_in) {
     //     res.redirect('/dashboard');
@@ -113,6 +144,8 @@ router.get('/comment/:id', async (req, res) => {
     }
 
 });
+
+
 
 //* Use withAuth middleware to prevent access to route aftrer pressing on SIGN IN option:
 // WHEN I revisit the site at a later time and choose to sign in

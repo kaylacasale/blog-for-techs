@@ -1,6 +1,6 @@
 //* to add a new comment (grabbing input from blog.handlebars, specifically new-comment-form) for POST request to add new comment
 //* to delete existing comment in separate "cooment.handlebars or deleteComment.handlebars"
-const { DELETE, UPDATE, POST } = require("sequelize/types/query-types");
+// const { DELETE, UPDATE, POST } = require("sequelize/types/query-types");
 
 const newFormHandler = async (event) => {
     event.preventDefault();
