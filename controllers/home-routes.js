@@ -22,13 +22,23 @@ router.get('/', async (req, res) => {
                         'username',
                     ]
 
-                }
+                },
+                {
+                    model: Comment,
+                },
             ]
         });
         //* serialize data so the template can read blog data (map through object elements aka parameters)
         const blogs = blogData.map((blog) =>
             blog.get({ plain: true })
         );
+
+        // const commentData = await Comment.findAll({
+
+
+        // });
+        // const comments = commentData.map((comment) =>
+        //     comment.get({ plain: true }))
         //* pass serialied data and session flag into template
         res.render('homepage', {
             blogs,
@@ -61,6 +71,7 @@ router.get('/blog/:id', async (req, res) => {
 
         const blog = blogData.get({ plain: true });
 
+
         res.render('blog', {
             ...blog,
             logged_in: req.session.logged_in
@@ -72,31 +83,35 @@ router.get('/blog/:id', async (req, res) => {
 });
 
 //* GET request - route to get one comment associated with blog post by primary key ( may not need in home routes)
+//* get comments associated with blog post to display as list after running through array in homepage.handlebars and display body index info in comment.handlebars
 router.get('/comment/:id', async (req, res) => {
-    if (!req.session.logged_in) {
-        res.redirect('/dashboard');
-    } else {
-        try {
-            const commentData = await Comment.findByPk(req.params.id, {
-                include: [
-                    {
-                        model: User,
-                        attributes: ['username'],
-                    },
-                ],
-            });
+    // if (!req.session.logged_in) {
+    //     res.redirect('/dashboard');
+    // } else {
+    try {
+        const commentData = await Comment.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                // {
+                //     model: Blog,
+                // },
+            ],
+        });
 
-            const comment = commentData.get({ plain: true });
+        const comment = commentData.get({ plain: true });
 
-            res.render('comment', {
-                ...comment,
-                logged_in: req.session.logged_in
-            });
-        } catch (err) {
-            console.log(err);
-            res.status(500).json(err);
-        }
+        res.render('comment', {
+            ...comment,
+            logged_in: req.session.logged_in
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
     }
+
 });
 
 //* Use withAuth middleware to prevent access to route aftrer pressing on SIGN IN option:
