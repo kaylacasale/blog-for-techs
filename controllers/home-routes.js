@@ -122,10 +122,12 @@ router.get('/comment/:id', async (req, res) => {
     try {
         const commentData = await Comment.findByPk(req.params.id, {
             include: [
-                {
-                    model: User,
-                    attributes: ['username'],
-                },
+                // {
+                //     model: User,
+                //     attributes: ['username'],
+                //     through: Blog,
+                //     as: 'comment_user'
+                // },
                 // {
                 //     model: Blog,
                 // },

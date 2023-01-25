@@ -1,7 +1,37 @@
 const router = require('express').Router();
-const { Blog } = require('../../models'); //* require by destructing Blog model object
+const { Blog, User, Comment } = require('../../models'); //* require by destructing Blog model object
 const withAuth = require('../../utils/auth');
 
+//* get all of comment data and display on individual blog page
+router.get('/', async (req, res) => {
+    try {
+        const commentData = await Comment.findAll({
+            include: [
+                {
+                    model: User,
+                    attributes: [
+                        'id',
+                        'username'
+                    ],
+                    through: Blog,
+                    as: 'comment_user'
+                },
+            ]
+        });
+        const comments = commentData.map((comment) =>
+            comment.get({ plain: true })
+        );
+        console.log(comments, 'in blog-routes')
+
+        res.render('blog', {
+            comments,
+            logged_in: req.session.logged_in,
+        })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
 //* withAuth - can only access route WITH user authentication (after being logged in successfully)
 //* POST request - route to add a new blog post
 router.post('/', withAuth, async (req, res) => {
