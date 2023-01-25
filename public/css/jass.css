@@ -1106,8 +1106,9 @@ a:hover {
     border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
 
+/* changed to 75% instead of 100% */
 form {
-    width: 100%;
+    width: 75%;
 }
 
 form .form-group {
