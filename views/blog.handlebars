@@ -1,35 +1,37 @@
-<div class="text-center">
-    <h2="text-center">{{title}}</h2>
-        <p>{{{get_emoji}}}</p>
-        <p>{{content}}</p>
+<div class="card text-center">
+    <h2 class="card-header text-center">{{title}}</h2>
+    <div class="card-body">
+        <h5 class="card-title">{{{get_emoji}}}</h5>
+        <p class="card-text">{{content}}</p>
         <p>Created by {{user.username}} on {{format_date date_created}}</p>
-        <p>
-            <i class="material-icons d-inline-block align-top" style="font-size:60px;color:blue;">comment</i>
+        <i class="material-icons d-inline-block align-top" style="font-size:60px;color:blue;">comment</i>
         <div class="dollar-amount">Created By: {{user.username}}</div>
+        <div class="card-footer text-muted">{{format_date date_created}}</div>
+    </div>
+</div>
 
-        </p>
+{{#each comments as |comment|}}
+<div class="card">
+    <div class="card-header">
+        Comment
+    </div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>{{comment.comment}}</p>
+            <footer class="blockquote-footer">User: <cite title="Source Title">{{username}}</cite></footer>
+        </blockquote>
+    </div>
+</div>
+{{/each}}
 
-        <form class="form new-comment-form">
-            <div class="form-group">
-                <label for="comment">Comments:</label>
-                {{!-- grab new comment input in a new comment or blog.js in public/js --}}
-                <input class="form-input" type="text" id="comment" name="comment" />
-            </div>
-        </form>
-        {{#each comments as |comment|}}
-        <div class="card">
-            <div class="card-header">
-                Comment
-            </div>
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p>{{comment.comment}}</p>
-                    <footer class="blockquote-footer">User: <cite title="Source Title">{{username}}</cite></footer>
-                </blockquote>
-            </div>
-        </div>
-        {{/each}}
-        {{!--
+<form class="form new-comment-form">
+    <div class="form-group">
+        <label for="comment">Add A Comment: </label>
+        {{!-- grab new comment input in a new comment or blog.js in public/js --}}
+        <input class="form-input" type="text" id="comment" name="comment" />
+    </div>
+</form>
+{{!--
 </div>
 {{#each comments as |comment|}}
 {{comment.comment}}
@@ -47,5 +49,6 @@
         {{!-- </a> --}}
     {{!-- </section> --}}
 {{!-- {{/each}} --}}
+
 
 <script src="/js/blog.js"></script>
