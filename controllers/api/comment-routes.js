@@ -10,9 +10,10 @@ router.get('/', async (req, res) => {
             comment.get({ plain: true }))
 
         res.render('comment', {
-            ...comments,
-            blog_id: req.session.blog_id
+            comments,
+            logged_in: req.session.logged_in,
         })
+
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -28,7 +29,8 @@ router.post('/', withAuth, async (req, res) => {
     try {
         const newComment = await Comment.create({
             ...req.body,
-            blog_id: req.session.blog_id,
+            comment: req.body.comment,
+            blog_id: req.body.blog_id,
         });
         res.status(200).json(newComment);
     } catch (err) {
@@ -42,8 +44,8 @@ router.put('/:id', withAuth, async (req, res) => {
             comment: req.body.comment,
 
             where: {
-                id: req.params.id,
-                blog_id: req.session.blog_id,
+                comment: req.body.comment,
+                blog_id: req.body.blog_id,
             },
         });
 
