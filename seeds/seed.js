@@ -21,14 +21,25 @@ const seedDatabase = async () => {
         });
     }
 
+    // await Comment.bulkCreate({
+    //     ...commentData,
+    //     blog_id: users[Math.floor(Math.random() * users.length)].id
+    // })
+    // console.log(commentData, blog_id)
+    await Comment.bulkCreate(commentData, {
+        individualHooks: true,
+        returning: true,
+    })
+    console.log(commentData)
+    // for (const comment of commentData) {
+    //     await Comment.create({
+    //         ...comment,
+    //         // blog_id: blogData[Math.floor(Math.random() * blogData.length)].id,
+    //         // blog_id: blogData[Math.floor(Math.random() * blogData.length)].id,
 
-    for (const comment of commentData) {
-        await Comment.create({
-            ...comment,
-            blog_id: blogData[Math.floor(Math.random() * blogData.length)].id,
-
-        });
-    }
+    //     });
+    //     console.log(comment)
+    // }
 
     // await Comment.bulkCreate(commentData, {
     //     individualHooks: true,

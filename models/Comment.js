@@ -22,7 +22,14 @@ Comment.init(
                 model: 'blog',
                 key: 'id',
             }
-        }
+        },
+        // user_id: { //* references blog id primary key
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'user',
+        //         key: 'id',
+        //     }
+        // }
     },
     {
         sequelize,
