@@ -2,7 +2,7 @@
 //* to delete existing comment in separate "cooment.handlebars or deleteComment.handlebars"
 // const { DELETE, UPDATE, POST } = require("sequelize/types/query-types");
 //* this is more or less 'comment.js' b/c handles comment data, from blog.handlebars page
-
+//* cannot add comments if user not logged in
 //* add new comment
 const newFormHandler = async (event) => {
     event.preventDefault();

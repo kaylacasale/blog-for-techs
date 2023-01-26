@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment, Blog } = require('../../models');
+const { Comment, Blog, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -20,6 +20,35 @@ router.get('/', async (req, res) => {
     }
 });
 
+//* find comment by primary key and include user data through blog to display the user associated with the blog (user can view blogs with comments from other users)
+router.get('/:id', async (req, res) => {
+    try {
+        const commentData = await Comment.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: [
+                        'id',
+                        'username'
+                    ],
+                    through: Blog,
+                    as: 'comment_user'
+                },
+            ]
+        });
+        const comment = commentData.map((comments) =>
+            comments.get({ plain: true })
+        );
+        console.log(comment, 'in comment-routes')
+        res.render('comment', {
+            comment,
+            logged_in: req.session.logged_in,
+        })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
 
 
 // const withAuth = require('../utils/auth');

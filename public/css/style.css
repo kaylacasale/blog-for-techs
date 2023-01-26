@@ -27,3 +27,7 @@ header,
 .blog-list {
     float: right;
 }
+
+.blog-buttons {
+    align-items: center;
+}

@@ -44,6 +44,51 @@ const newFormHandler = async (event) => {
     }
 };
 
+const delButtonHandler = async (event) => {
+    if (event.target.hasAttribute('data-id')) {
+        const id = event.target.getAttribute('data-id');
+
+        const response = await fetch(`/api/blogs/${id}`, {
+            method: 'DELETE',
+            // body: JSON.stringify({
+            //     blog_id: id
+            // }),
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // }
+        });
+
+        if (response.ok) {
+            document.location.replace('/dashboard');
+        } else {
+            alert('Failed to delete project');
+        }
+    }
+};
+
+const updateButtonHandler = async (event) => {
+    if (event.target.hasAttribute('data-id')) {
+        const id = event.target.getAttribute('data-id');
+        //* put request to update blog data from dashboard
+        const response = await fetch(`/api/blogs/${id}`, {
+            method: 'PUT',
+        });
+
+        if (response.ok) {
+            document.location.replace('/dashboard');
+        } else {
+            alert('Failed to update project')
+        }
+    }
+};
 document
     .querySelector('.new-comment-form')
     .addEventListener('submit', newFormHandler);
+
+document
+    .querySelector('.delete-blog')
+    .addEventListener('click', delButtonHandler);
+
+document
+    .querySelector('.delete-blog')
+    .addEventListener('click', updateButtonHandler)
