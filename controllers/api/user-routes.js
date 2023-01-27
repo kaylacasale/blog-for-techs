@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Blog, Comment } = require('../../models');
 
 //* route to create new user (frontend)
 //* post request because sending over username and password
@@ -7,9 +7,12 @@ const { User } = require('../../models');
 // THEN I am prompted to either sign up or sign in
 // WHEN I choose to sign up
 // THEN I am prompted to create a username and password
+
+
 router.post('/', async (req, res) => {
     try {
         const userData = await User.create({
+            user_id: req.session.id,
             username: req.body.username,
             password: req.body.password,
         });
@@ -58,6 +61,7 @@ router.post('/login', async (req, res) => {
 
         req.session.save(() => {
             req.session.user_id = userData.id;
+            req.session.username = userData.username;
             req.session.logged_in = true;
             console.log(
                 '🚀 ~ file: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
@@ -104,6 +108,7 @@ router.post('/signup', async (req, res) => {
 
         req.session.save(() => {
             req.session.user_id = userData.id;
+            req.session.username = userData.username;
             req.session.logged_in = true;
             console.log(
                 '🚀 ~ file: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',

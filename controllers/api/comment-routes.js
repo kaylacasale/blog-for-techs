@@ -31,8 +31,6 @@ router.get('/:id', async (req, res) => {
                         'id',
                         'username'
                     ],
-                    through: Blog,
-                    as: 'comment_user'
                 },
             ]
         });
@@ -66,7 +64,7 @@ router.post('/', withAuth, async (req, res) => {
         res.status(400).json(err);
     }
 });
-
+//* update
 router.put('/:id', withAuth, async (req, res) => {
     try {
         const commentData = await Blog.update({

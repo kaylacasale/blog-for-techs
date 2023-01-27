@@ -14,6 +14,12 @@ router.get('/', async (req, res) => {
     try {
         //* get all blogs and JOIN with user data
         const blogData = await Blog.findAll({
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'date_created',
+            ],
             include: [
                 {
                     model: User, //* include User data in homepage to note on blog post
@@ -30,6 +36,14 @@ router.get('/', async (req, res) => {
                         'comment',
                         'blog_id'
                     ],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                    // include: {
+                    //     model: User,
+                    //     attributes: ['id', 'username']
+                    // }
                 },
             ]
         });
@@ -37,7 +51,7 @@ router.get('/', async (req, res) => {
         const blogs = blogData.map((blog) =>
             blog.get({ plain: true })
         );
-        console.log(blogs)
+        console.log(blogs, 'in home-routes findAll blogs /')
         //* pass serialied data and session flag into template
         res.render('homepage', {
             blogs,
@@ -55,6 +69,11 @@ router.get('/', async (req, res) => {
 router.get('/blog/:id', async (req, res) => {
     try {
         const blogData = await Blog.findByPk(req.params.id, {
+            attributes: [
+                'id',
+                'title',
+                'content',
+            ],
             include: [
                 {
                     model: Comment,
@@ -63,6 +82,10 @@ router.get('/blog/:id', async (req, res) => {
                         'comment',
                         'blog_id'
                     ],
+                    include: {
+                        model: User,
+                        attributes: ['id', 'username']
+                    }
                 },
                 {
                     model: User,
@@ -74,7 +97,7 @@ router.get('/blog/:id', async (req, res) => {
         });
 
         const blog = blogData.get({ plain: true });
-        console.log(blog)
+        console.log(blog, 'home-routes line 77')
 
         res.render('blog', {
             ...blog,
@@ -121,7 +144,18 @@ router.get('/comment/:id', async (req, res) => {
     // } else {
     try {
         const commentData = await Comment.findByPk(req.params.id, {
+            // where: {
+            //     id: req.params.id,
+            // },
             include: [
+                {
+                    model: User,
+                    attributes: [
+                        'id',
+                        'username',
+                    ]
+                }
+
 
                 // {
                 //     model: User,
@@ -148,11 +182,48 @@ router.get('/comment/:id', async (req, res) => {
 
 });
 
+// router.get('/dashboard', withAuth, async (req, res) => {
+//     try {
+//         //* Find the logged in user based on the session ID
+//         const blogData = await Blog.findAll({
+//             where: {
+//                 user_id: req.session.user_id,
+//             },
+//             include: [
+//                 {
+//                     model: Comment,
+//                     attributes: [
+//                         'id',
+//                         'comment',
+//                         'blog_id',
+//                         'user_id',
+//                     ]
+//                 },
+//                 {
+//                     model: User,
+//                     attributes: [
+//                         'username',
+//                     ]
+//                 }
+//                 // {
+//                 //     model: User,
+//                 // },
+//             ],
+//         });
+//         const blogs = blogData.map((blog) =>
+//             blog.get({ plain: true })
+//         );
+//         // const user = userData.get({ plain: true });
 
+//         res.render('blogs', {
+//             ...blogs,
+//             logged_in: true
+//         });
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
-//* Use withAuth middleware to prevent access to route aftrer pressing on SIGN IN option:
-// WHEN I revisit the site at a later time and choose to sign in
-// THEN I am prompted to enter my username and password
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
         //* Find the logged in user based on the session ID
@@ -171,6 +242,86 @@ router.get('/dashboard', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+// router.get('/dashboard', withAuth, async (req, res) => {
+//     try {
+//         //* Find the logged in user based on the session ID
+//         const blogData = await Blog.findOne({
+//             where: {
+//                 id: req.params.id,
+//             },
+//             attributes: [
+//                 'id',
+//                 'title',
+//                 'content'
+//             ],
+//             include: [
+//                 {
+//                     model: User,
+//                     attributes: [
+//                         'username',
+//                     ]
+//                 },
+//                 {
+//                     model: Comment,
+//                     attributes: [
+//                         'id',
+//                         'comment',
+//                         'blog_id',
+//                         'user_id',
+//                     ]
+//                 },
+
+//                 // {
+//                 //     model: User,
+//                 // },
+//             ],
+//         });
+//         // const blogs = blogData.map((blog) =>
+//         //     blog.get({ plain: true })
+//         // );
+//         const blog = blogData.get({ plain: true })
+//         // const user = userData.get({ plain: true });
+
+//         res.render('blog', {
+//             ...blog,
+//             logged_in: true
+//         });
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
+
+//* Use withAuth middleware to prevent access to route aftrer pressing on SIGN IN option:
+// WHEN I revisit the site at a later time and choose to sign in
+// THEN I am prompted to enter my username and password
+// router.get('/dashboard', withAuth, async (req, res) => {
+//     try {
+//         //* Find the logged in user based on the session ID
+//         const userData = await User.findByPk(req.session.user_id, {
+//             attributes: { exclude: ['password'] },
+//             include: [
+//                 {
+//                     model: Blog,
+//                 },
+//                 {
+//                     model: Comment,
+//                 },
+//             ],
+//         });
+//         //     const blogs = blogData.map((blog) =>
+//         //     blog.get({ plain: true })
+//         // );
+//         const user = userData.get({ plain: true });
+
+//         res.render('dashboard', {
+//             ...user,
+//             logged_in: true
+//         });
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
 //* login route (to frontend, handlebars.js)
 //* if the user is already logged in, redirect the request to another route (the dashboards to view blog posts)

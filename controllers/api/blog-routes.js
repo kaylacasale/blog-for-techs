@@ -5,19 +5,31 @@ const withAuth = require('../../utils/auth');
 //* get all of comment data and display on individual blog page
 router.get('/', async (req, res) => {
     try {
-        const commentData = await Comment.findAll({
+        const commentData = await Blog.findAll({
+            attributes: [
+                'id',
+                'title',
+                'content',
+            ],
             include: [
+                {
+                    model: Comment,
+                    attributes: ['id', 'comment'],
+                    include: {
+                        model: User,
+                        attributes: ['id', 'username']
+                    }
+                },
                 {
                     model: User,
                     attributes: [
                         'id',
                         'username'
                     ],
-                    through: Blog,
-                    as: 'comment_user'
-                },
+                }
             ]
         });
+        console.log('BLOG find all response line 34 blog-routes.js', commentData)
         const comments = commentData.map((comment) =>
             comment.get({ plain: true })
         );

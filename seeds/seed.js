@@ -20,16 +20,21 @@ const seedDatabase = async () => {
             user_id: users[Math.floor(Math.random() * users.length)].id,
         });
     }
-
+    for (const comment of commentData) {
+        await Comment.create({
+            ...comment,
+            user_id: users[Math.floor(Math.random() * users.length)].id
+        })
+    }
     // await Comment.bulkCreate({
     //     ...commentData,
     //     blog_id: users[Math.floor(Math.random() * users.length)].id
     // })
     // console.log(commentData, blog_id)
-    await Comment.bulkCreate(commentData, {
-        individualHooks: true,
-        returning: true,
-    })
+    // await Comment.bulkCreate(commentData, {
+    //     individualHooks: true,
+    //     returning: true,
+    // })
     console.log(commentData)
     // for (const comment of commentData) {
     //     await Comment.create({

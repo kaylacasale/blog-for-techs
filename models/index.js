@@ -27,11 +27,12 @@ Comment.belongsTo(User, {
     // where: {
     //     id: 'blog_id'
     // }
-    through: {
-        model: Blog,
-    },
-    foreignKey: 'blog_id',
-    as: 'comment_user'
+    foreignKey: 'user_id',
+    // through: {
+    //     model: Blog,
+    // },
+    // foreignKey: 'blog_id',
+    // as: 'comment_user'
 })
 
 module.exports = { User, Blog, Comment };
