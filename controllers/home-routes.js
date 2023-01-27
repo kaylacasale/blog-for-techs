@@ -181,6 +181,52 @@ router.get('/comment/:id', async (req, res) => {
     }
 
 });
+//* renders same handlebars view but with an update button
+//* check on handlebars if isupdate is true, show update button otherwise show a save button
+router.get('/dashboard/edit/:id', async (req, res) => {
+    try {
+        const blogData = await Blog.findByPk(req.params.id, {
+
+
+            where: {
+                id: req.params.id
+            },
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'date_created'
+            ],
+            include: [
+                {
+                    model: User,
+                    attributes: [
+                        'username',
+                    ]
+                },
+                {
+                    model: Comment,
+                    attributes: [
+                        'id',
+                        'comment',
+                        'blog_id',
+                        'user_id',
+                    ]
+                }
+            ]
+        })
+        const blog = blogData.get({ plain: true })
+        res.render('update-blog', {
+            ...blog,
+            logged_in: req.session.logged_in,
+        })
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+
 
 // router.get('/dashboard', withAuth, async (req, res) => {
 //     try {
@@ -242,6 +288,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+//* '/dashboard/params
+
 
 // router.get('/dashboard', withAuth, async (req, res) => {
 //     try {

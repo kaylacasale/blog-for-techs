@@ -81,3 +81,6 @@ document
 // document
 //     .querySelector('.blog-list')
 //     .addEventListener('click', updateButtonHandler)
+document
+    .querySelector('#updateBtn')
+    .addEventListener('click')
