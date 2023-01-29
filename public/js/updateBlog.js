@@ -13,6 +13,7 @@ const updateButtonHandler = async (event) => {
     const id = window.location.toString().split('/')[window.location.toString().split('/').length - 1];
 
     //* put request to update blog data from dashboard
+    //* send fetch to 'api/blog/:id' in order to send through api route in blogs to update existing blog with same blog_id
     const response = await fetch(`/api/blogs/${id}`, {
         method: 'PUT',
         body: JSON.stringify(
@@ -34,7 +35,7 @@ const updateButtonHandler = async (event) => {
     }
 };
 
-
+//* 'submit' instead of click because type of button is submit in update form (update-blog.handlebars) since window.location defined above gathers data from any click, so to differentiate click from submit button
 document
     .querySelector('.blog-update')
     .addEventListener('submit', updateButtonHandler)

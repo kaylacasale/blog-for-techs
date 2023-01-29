@@ -9,10 +9,10 @@
         {{!-- <div class="card-footer text-muted">{{format_date date_created}}</div> --}}
     </div>
 </div>
-<div class="blog-buttons" style="align-items: center;">
+{{!-- <div class="blog-buttons" style="align-items: center;">
     <button type="submit" class="btn btn-primary">Update</button>
     <button type="submit" class="btn btn-primary" data-id="{{blog.id}}">Delete</button>
-</div>
+</div> --}}
 
 {{#each comments as |comment|}}
 <div class="card mt-3">
@@ -28,6 +28,7 @@
         </blockquote>
     </div>
 </div>
+
 {{/each}}
 <footer class="blockquote-footer">User: <cite title="Source Title">
         {{user.username}}</cite></footer>
