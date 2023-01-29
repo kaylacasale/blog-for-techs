@@ -20,10 +20,14 @@
             {{!-- to submit new blog below (on dashboard page) --}}
             {{!-- blog.id? --}}
             <div class="form-group">
-                <button class="btn btn-sm btn-danger" data-id="{{id}}">UPDATE</button>
+                <button class="btn btn-sm btn-danger" data-id="{{id}}" type="submit">UPDATE</button>
             </div>
-            <div class="form-group">
+            {{!-- <div class="form-group">
                 <button class="btn btn-sm btn-danger" data-id="{{id}}">DELETE</button>
-            </div>
+            </div> --}}
         </form>
     </div>
+
+    <script src="/js/updateBlog.js"></script>
+    {{!--
+    <script src="/js/dashboard.js"></script> --}}

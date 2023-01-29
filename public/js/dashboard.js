@@ -67,6 +67,9 @@ const delButtonHandler = async (event) => {
         }
     }
 };
+
+
+
 //* when use clicks on btn with class '.new-blog-form', call function newFormHandler to make post request with new blog title and content
 
 //* add href to updateBlog.handlebars of same form as blog but places to edit info
@@ -81,6 +84,7 @@ document
 // document
 //     .querySelector('.blog-list')
 //     .addEventListener('click', updateButtonHandler)
-document
-    .querySelector('#updateBtn')
-    .addEventListener('click')
+//* grab '.blog-update' form to listen for when form is submitted upon clicking update
+// document
+//     .querySelector('.blog-update')
+//     .addEventListener('click', updateButtonHandler)

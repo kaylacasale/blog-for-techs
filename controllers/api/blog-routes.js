@@ -60,27 +60,27 @@ router.post('/', withAuth, async (req, res) => {
 });
 //* update blog data (title and content) with PUT request
 //* after pressing UPDATE button referenced in updateBlog.handlebars and handled in public/js/dashboard.js
-router.put('/:id', withAuth, async (req, res) => {
-    try {
-        const blogData = await Blog.update({
-            title: req.body.title,
-            content: req.body.content,
+// router.put('/:id', withAuth, async (req, res) => {
+//     try {
+//         const blogData = await Blog.update({
+//             title: req.body.title,
+//             content: req.body.content,
 
 
-            where: {
-                id: req.params.id,
-                user_id: req.session.user_id,
-            },
-        });
-        if (!blogData) {
-            res.status(404).json({ message: 'No blog was found with id!' })
-            return;
-        }
-        res.status(200).json(blogData);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+//             where: {
+//                 id: req.params.id,
+//                 user_id: req.session.user_id,
+//             },
+//         });
+//         if (!blogData) {
+//             res.status(404).json({ message: 'No blog was found with id!' })
+//             return;
+//         }
+//         res.status(200).json(blogData);
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
 //* DELETE request - route to delete an existing blog post (by id)
 //* after pressing DELETE button referenced in deleteBlog.handlebars and handled in public/js/dashboard.js
@@ -102,4 +102,26 @@ router.delete('/:id', withAuth, async (req, res) => {
     }
 });
 
+//* update blog route from dashboard/edit
+router.put('/:id', withAuth, async (req, res) => {
+    try {
+        const blogData = await Blog.update({
+            title: req.body.title,
+            content: req.body.content,
+
+        },
+            {
+                where: {
+                    id: req.params.id,
+                },
+            });
+        if (!blogData) {
+            res.status(404).json({ message: 'blog unable to update' })
+            return;
+        }
+        res.status(200).json(blogData);
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
 module.exports = router;
