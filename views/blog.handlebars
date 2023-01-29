@@ -27,11 +27,13 @@
                     {{user.username}}</cite></footer> --}}
         </blockquote>
     </div>
+    <footer class="blockquote-footer mt-2">User: <cite title="Source Title">
+            {{comment.user.username}}</cite></footer>
 </div>
 
 {{/each}}
-<footer class="blockquote-footer">User: <cite title="Source Title">
-        {{user.username}}</cite></footer>
+{{!-- <footer class="blockquote-footer">User: <cite title="Source Title">
+        {{comment.user.username}}</cite></footer> --}}
 
 <form class="form new-comment-form">
     <div class="form-group">

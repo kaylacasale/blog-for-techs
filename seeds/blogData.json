@@ -1,7 +1,7 @@
 [
     {
-        "title": "I Love Coding",
-        "content": "I am in a UCLA Coding Boot Camp",
-        "blog_id": 1
+        "title": "Computers That Power Self-Driving Cars",
+        "content": "Computers that power self-driving cars could be a huge driver of global carbon emissions. A study shows that if autonous vehicles are widely adopted, hardware efficiency will need to advance rapidly to keep computing-related emissions in check.",
+        "blog_id": 2
     }
 ]
