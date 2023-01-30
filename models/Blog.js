@@ -16,7 +16,7 @@ Blog.init(
             allowNull: false,
         },
         content: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
         },
         date_created: { //* TODO: pass into helpers.js to format date (?)
