@@ -23,7 +23,7 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 * [Database - MySQL Tables](#database---mysql-tables)
 
 ## Description
-A convenient, browser-based platform developers look to share and gain up-to-date knowledge about technology.
+A convenient, browser-based platform for developers looking to share and gain up-to-date knowledge about technology.
 
 ## Installation
 This application allows users to easily create, update, and delete blogs and comments after:
@@ -71,4 +71,53 @@ OR
 
 >> **Personalize your seeds by entering your own blog, user, and comment information into the JSON files located in the `seeds` folder**
 
+## Usage
 
+To start the application, run the following command(s) in the commend-line.
+
+    `npm run start`
+
+OR
+
+    `npm start`
+
+This application lets you do the things:
+
+    - Navigate to the homepage where I could view existing blog posts, view more information about each post including post creator's username, date created, and and comments on the post, the option to log-in if you are a pre-existing user, and the option to sign-up from the log-in page.
+    - Sign-up with a username and password (over 8 character in length) and save login credentials to populate your user data 
+    - Log-in with a valid username and password to connect to your tech blog database
+    - Once logged in, users can navigate to the dashboard to view and access all blog posts published as a user, click on an individual blog post to see associated comments, delete a blog post, and update a blog post you created
+        - After pressing the update button available in the dashboard, users will be redirected to a new page where the title and content of their post is pre-populated with existing data, and where they can manipulate and update the blog by entering new information into the text area and pressing SUBMIT
+    - Once logged in, users can navigate to homepage and click on any blog post, be directed to specific information about the post, and add as many comments as desired that will remain under that blog post
+    - Once logged in, users can logout of their account by pressing the logout link and later return to the login page with valid credentials
+
+## Built With
+> HTML
+> CSS 
+> Javascript
+
+* Node.js
+* Sequelize
+* MySQL Workbench
+* npm
+    * express-sessions
+    * express-handlebars
+    * dotenv
+* Bootstrap 
+* Heroku (deployment)
+* Adobe XD (visuals)
+
+## Visuals
+
+> ERD (Entity Relationship Diagram)
+- Reverse Engineered via MySQL Workbench
+
+![ERD MySQL](assets/tech-blog-erd.png "Reverse Engineer Diagram")
+
+- Showing Indexes
+
+![ERD MySQL](assets/tech-blog-erd-showingindexes.png "Showing Indexes")
+
+> 3D Visual ERD (created with Adobe XD)
+- Shows how seqeulize models get sent in routes to handlebars pages and how relationships through foreign keys allow various of acessing data through linked models
+![3D ERD](assets/blog_for_techs-visual-erd.png "Sequelize models through routes to handlebars")
