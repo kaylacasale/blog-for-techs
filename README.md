@@ -140,3 +140,12 @@ This application lets you do the things:
 
 >> 2. View Your Blogs
 ![View Your Blogs](assets/view-blogs.png "View Existing Blogs")
+
+>> 3. Delete Blogs
+![Delete Blog](assets/delete-blog.png "Delete Existing Blogs")
+
+>> 4. Update Blogs
+![Update Blog](assets/update-blog.png "Updte Existing Blogs")
+
+> Homepage After Login
+![Homepage](assets/homepage.png "Homepage for Authorized Users")
