@@ -98,7 +98,7 @@ This application lets you do the things:
 
 * Node.js
 * Sequelize
-* MySQL Workbench
+* MySQL Workbench (database & visuals)
 * npm
     * express-sessions
     * express-handlebars
@@ -121,3 +121,22 @@ This application lets you do the things:
 > 3D Visual ERD (created with Adobe XD)
 - Shows how seqeulize models get sent in routes to handlebars pages and how relationships through foreign keys allow various of acessing data through linked models
 ![3D ERD](assets/blog_for_techs-visual-erd.png "Sequelize models through routes to handlebars")
+
+## Screens
+> Main Screen
+![Main Page](assets/see-blogs.png "See Blog Posts")
+
+> Signup
+![Signup](assets/signup.png "Signup Page")
+
+> Login
+![Login](assets/login.png "Login Page")
+
+> Dashboard
+![Dashboard](assets/dashboard.png "Dashboard Routes")
+
+>> 1. Create Blogs
+![Create Blog](assets/create-blog.png "Create Blog Posts")
+
+>> 2. View Your Blogs
+![View Your Blogs](assets/view-blogs.png "View Existing Blogs")
