@@ -24,6 +24,9 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 ## Description
 A convenient, browser-based platform for developers looking to share and gain up-to-date knowledge about technology.
 
+
+**URL to Deployed Application (Heroku)**: https://guarded-headland-91004.herokuapp.com/
+
 ## Installation
 This application allows users to easily create, update, and delete blogs and comments after:
 
