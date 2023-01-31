@@ -17,10 +17,9 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 * [Description](#description)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Walk-through Video](#walk-through-video)
 * [Built With](#built-with)
-* [ERD](#erd)
-* [Database - MySQL Tables](#database---mysql-tables)
+* [Visuals](#visuals)
+* [Screens](#screens)
 
 ## Description
 A convenient, browser-based platform for developers looking to share and gain up-to-date knowledge about technology.
